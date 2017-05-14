@@ -92,7 +92,7 @@ void RunAstar( const StateP25& beg )
 	}
 
 	
-	printf("\n\nCALCULATION-TIME = %d second(s)\n\n", as.FindTime());
+    // printf("\n\nCALCULATION-TIME = %d second(s)\n\n", as.FindTime());
 	// printf("\n***** Calculations completed successfully! *****\n\n");
 }
 
@@ -100,28 +100,16 @@ void RunAstar( const StateP25& beg )
 void Intro(FILE* out)
 {
 	fprintf(out,
-		"\n\n\n"
-		"===============================================================================\n"
-		" AAAAA  SSSSS TTTTT AAAAA  RRRRR   Zbigniew ROMANOWSKI,   romz@wp.pl           \n"
-		" A   A  S       T   A   A  R   R                                               \n"         
-		" AAAAA  SSSSS   T   AAAAA  RRRRR                                               \n"
-		" A   A      S   T   A   A  R  R    version: 1.0                                \n"    
-		" A   A  SSSSS   T   A   A  R   R   compilation date: %s (%s)                   \n"
+        "===============================================================================\n"
+        " AAAAA  SSSSS TTTTT AAAAA  RRRRR   Zbigniew ROMANOWSKI  \n"
+        " A   A  S       T   A   A  R   R                        \n"
+        " AAAAA  SSSSS   T   AAAAA  RRRRR                        \n"
+        " A   A      S   T   A   A  R  R    romz@wp.pl           \n"
+        " A   A  SSSSS   T   A   A  R   R                        \n"
 		"===============================================================================\n\n"
 		" This program solves 24-puzzle problem.\n"
 		" It uses A* (A-star) with Manhattan metric to find the solution.\n"
 		" Open set and closed set of A* are implemented as STL containers.\n"
-		" For demonstration purpose, exemplary begin states are provided.\n"
-		"\n"
-		"  STATE-ID     NUMBER-OF-MOVES    CLOSED-SET    OPEN-SET      \n"
-		"--------------------------------------------------------------\n"
-		"    0          15 (very easy)           29            34      \n"
-		"    1          30 (easy)             3 130         4 250      \n"
-		"    2          42                   38 685        44 242      \n"
-		"    3          52                  369 542       450 681      \n"
-		"    4          48                  362 713       416 516      \n"
-		"    5          ?? (very hard)                                 \n"
-		"===============================================================================\n\n",
-		__DATE__, __TIME__);
+        "===============================================================================\n\n");
 }
 

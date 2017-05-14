@@ -33,7 +33,7 @@ const char* const StateP25::m_label[TILENO] = {
 //
 // Constructor, Default
 //
-StateP25::StateP25(void)
+StateP25::StateP25()
 {
     m_tab.fill( 0 );
 }
@@ -183,8 +183,9 @@ char i = 0;
 //
 // Prints the difference between "this" state and "next" state. 
 //
-void StateP25::PrintDiff(const StateP25& next) const
+void StateP25::PrintDiff(const StateP25& /*next*/) const
 {
+    /*
 // Name of moves
 static const char * const moveName[4] = {"Right", "Left", "Up", "Down"};
 const char sp = SpaceIdx();
@@ -205,5 +206,6 @@ char m;
 
 	// printf("  Next move: '%s' %s\n\n", next.Lab(sp), moveName[m]);
 	printf("%s ", next.Lab(sp));
+    */
 }
 

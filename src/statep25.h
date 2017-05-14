@@ -29,6 +29,7 @@
 #include <cassert>
 #include <string>
 #include <array>
+#include <cstdint>
 
 class StateP25
 {
@@ -43,19 +44,19 @@ public:
 
 
 public:
-	StateP25(void);
+    StateP25( );
     explicit StateP25( const std::array< char, TILENO> tab );
 
 	bool operator==(const StateP25& s) const;
 	bool operator< (const StateP25& s) const;
 
-	char SpaceIdx(void) const;
-	bool IsSpace(char sp) const;
+    char SpaceIdx( ) const;
+    bool IsSpace( uint8_t idx ) const;
 	
 	void Swap(char oldPos, char newPos);
 
-	char X(char i) const;
-	char Y(char i) const;
+    char X( uint8_t idx ) const;
+    char Y( uint8_t idx ) const;
 
 	void Print(FILE* out) const;
 	void PrintDiff(const StateP25& next) const;
@@ -63,7 +64,7 @@ public:
     void Read( const std::string& file );
 
 private:
-	const char* Lab(char i) const;
+    const char* Lab( uint8_t idx ) const;
 	
 private:
 	// Tiles on the board
@@ -82,13 +83,13 @@ private:
 };
 
 //
-// Returns "true", if on position "sp" is SPACE
+// Returns "true", if on position "idx" is SPACE
 //
 inline
-bool StateP25::IsSpace(char sp) const
+bool StateP25::IsSpace( uint8_t idx ) const
 {
-	assert(sp >= 0 && sp < TILENO);
-	return (m_tab[sp] == 0);
+    assert( idx < TILENO );
+    return ( m_tab[ idx ] == 0 );
 }
 
 //
@@ -97,7 +98,7 @@ bool StateP25::IsSpace(char sp) const
 inline
 void StateP25::Swap(char oldPos, char newPos)
 {
-const char tmp = m_tab[newPos];
+    const char tmp = m_tab[newPos];
 
 	m_tab[newPos] = m_tab[oldPos];
 	m_tab[oldPos] = tmp;
@@ -108,27 +109,27 @@ const char tmp = m_tab[newPos];
 // Returns label of i-th tile.
 //
 inline
-const char* StateP25::Lab(char i) const
+const char* StateP25::Lab( uint8_t idx ) const
 {
-	return m_label[m_tab[i]];
+    return m_label[ static_cast<uint>( m_tab[ idx ] ) ];
 }
 
 //
 // Returns X-coordinate of i-th tile
 //
 inline
-char StateP25::X(char i) const
+char StateP25::X( uint8_t idx ) const
 {
-	return m_coorX[m_tab[i]];
+    return m_coorX[ static_cast<uint>( m_tab[ idx ] ) ];
 }
 
 //
 // Returns Y-coordinate of i-th tile
 //
 inline
-char StateP25::Y(char i) const
+char StateP25::Y( uint8_t idx ) const
 {
-	return m_coorY[m_tab[i]];
+    return m_coorY[ static_cast<uint>( m_tab[ idx ] ) ];
 }
 
 
@@ -136,11 +137,11 @@ char StateP25::Y(char i) const
 // Equality operator
 //
 inline
-bool StateP25::operator==(const StateP25& s) const
+bool StateP25::operator==( const StateP25& s ) const
 {
-    for(int i = 0; i < TILENO; i++)
+    for( uint8_t i = 0; i < TILENO; i++ )
     {
-        if(m_tab[i] != s.m_tab[i])
+        if( m_tab[ i]  != s.m_tab[ i ])
             return false;
     }
     return true;

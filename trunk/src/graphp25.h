@@ -44,8 +44,8 @@ public:
 private:
 	StateP25::Cost Manhattan(const StateP25& x) const;
 
-	static char MovesNo(char i);
-	static char Move(char sp, char j);
+    static char MovesNo( uint8_t idx );
+    static char Move( uint8_t sp, uint8_t j );
 
 private:
 	// The GOAL state
@@ -87,21 +87,21 @@ bool GraphP25::IsGoal(const StateP25& x) const
 // Return number of moves, when space is on i-th position 
 //
 inline
-char GraphP25::MovesNo(char i)
+char GraphP25::MovesNo( uint8_t idx )
 {
-	assert(i >= 0 && i < StateP25::TILENO);
-	return m_moves[i][0];
+    assert( idx < StateP25::TILENO );
+    return m_moves[ idx ][ 0 ];
 }
 
 //
 // Returns j-th allowed position, when space is on "sp" position
 //
 inline
-char GraphP25::Move(char sp, char j)
+char GraphP25::Move( uint8_t sp, uint8_t j )
 {
-	assert(sp >= 0 && sp < StateP25::TILENO);
-	assert(j >= 0 && j < MAXCHILDNO);
-	return m_moves[sp][j + 1];
+    assert( sp < StateP25::TILENO );
+    assert( j < MAXCHILDNO );
+    return m_moves[ sp ][ j + 1 ];
 }
 
 //

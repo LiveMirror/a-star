@@ -49,7 +49,7 @@ public:
 
 	void Erase(void);
 
-	void PrintStats(FILE* out) const;
+    void PrintStats() const;
 
 private:
 	// Array storing data, needed by priority queue
@@ -248,29 +248,18 @@ size_t OpenSetHash<S>::Size(void) const
 
 
 template<typename S>
-void OpenSetHash<S>::PrintStats(FILE* out) const
+void OpenSetHash<S>::PrintStats() const
 {
 #ifdef ASTAR_STATISTICS
-	fprintf(out, 
-//		"\nSTATISTICS:\n"
-		"  OpenSetHash::Search.... = %d\n"
-		"  OpenSetHash::Add....... = %d\n"
-		"  OpenSetHash::Best...... = %d\n"
-		"  OpenSetHash::RemoveBest = %d\n"
-		"  OpenSetHash::IsEmpty... = %d\n"
-		"  OpenSetHash::Update.... = %d\n"
-		"  OpenSetHash::Erase..... = %d\n"
-		"  OpenSetHash::Size...... = %d\n"
-		"  OpenSetHash::Collision. = %d\n", 
-		m_stats_search, 
-		m_stats_add,
-		m_stats_best, 
-		m_stats_removeBest, 
-		m_stats_isEmpty, 
-		m_stats_update,
-		m_stats_erase,
-		m_stats_size,
-		m_stats_collision);
+    std::cout << "  OpenSetHash::Search.... = " << m_stats_search << "\n";
+    std::cout << "  OpenSetHash::Add....... = " << m_stats_add << "\n";
+    std::cout << "  OpenSetHash::Best...... = " << m_stats_best << "\n";
+    std::cout << "  OpenSetHash::RemoveBest = " << m_stats_removeBest << "\n";
+    std::cout << "  OpenSetHash::IsEmpty... = " << m_stats_isEmpty << "\n";
+    std::cout << "  OpenSetHash::Update.... = " << m_stats_update << "\n";
+    std::cout << "  OpenSetHash::Erase..... = " << m_stats_erase << "\n";
+    std::cout << "  OpenSetHash::Size...... = " << m_stats_size << "\n";
+    std::cout << "  OpenSetHash::Collision. = " << m_stats_collision << "\n";
 #else
 	// fprintf(out, "OpenSetSTL. No statistics available!\n");
 #endif

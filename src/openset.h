@@ -77,6 +77,7 @@
 #include <set>
 #include <map>
 #include <cstdio>
+#include <iostream>
 
 // ---------------------------------------------------------------------------------
 //   F U N C T O R S
@@ -154,7 +155,7 @@ public:
 
 	void Erase(void);
 
-	void PrintStats(FILE* out) const;
+    void PrintStats() const;
 
 private:
 	// Array storing data, needed by priority queue
@@ -372,27 +373,17 @@ size_t OpenSet<S>::Size(void) const
 
 
 template<typename S>
-void OpenSet<S>::PrintStats(FILE* out) const
+void OpenSet<S>::PrintStats() const
 {
 #ifdef ASTAR_STATISTICS
-	fprintf(out, 
-//		"\nSTATISTICS:\n"
-        "  OpenSet::Search.... = %d\n"
-        "  OpenSet::Add....... = %d\n"
-        "  OpenSet::Best...... = %d\n"
-        "  OpenSet::RemoveBest = %d\n"
-        "  OpenSet::IsEmpty... = %d\n"
-        "  OpenSet::Update.... = %d\n"
-        "  OpenSet::Erase..... = %d\n"
-        "  OpenSet::Size...... = %d\n",
-		m_stats_search, 
-		m_stats_add,
-		m_stats_best, 
-		m_stats_removeBest, 
-		m_stats_isEmpty, 
-		m_stats_update,
-		m_stats_erase,
-		m_stats_size);
+    std::cout << "  OpenSet::Search.... = " << m_stats_search << "\n";
+    std::cout << "  OpenSet::Add....... = " << m_stats_add << "\n";
+    std::cout << "  OpenSet::Best...... = " << m_stats_best << "\n";
+    std::cout << "  OpenSet::RemoveBest = " << m_stats_removeBest << "\n";
+    std::cout << "  OpenSet::IsEmpty... = " << m_stats_isEmpty << "\n";
+    std::cout << "  OpenSet::Update.... = " << m_stats_update << "\n";
+    std::cout << "  OpenSet::Erase..... = " << m_stats_erase << "\n";
+    std::cout << "  OpenSet::Size...... = " << m_stats_size << "\n";
 #else
     // fprintf(out, "OpenSet. No statistics available!\n");
 #endif

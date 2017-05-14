@@ -24,6 +24,7 @@
 
 #include "hashset.h"
 #include <cstdio>
+#include <iostream>
 
 template<typename S>
 class ClosedSetHash
@@ -37,7 +38,7 @@ public:
 	void Erase(void);
 	size_t Size() const;
 
-	void PrintStats(FILE* out) const;
+    void PrintStats() const;
 
 private:
 	// Container storing pointers to "PathNode<S>"
@@ -136,21 +137,14 @@ size_t ClosedSetHash<S>::Size() const
 // Prints statistics to file "out"
 //
 template<typename S>
-void ClosedSetHash<S>::PrintStats(FILE* out) const
+void ClosedSetHash<S>::PrintStats() const
 {
 #ifdef ASTAR_STATISTICS
-	fprintf(out, 
-//		"\nSTATISTICS:\n"
-		"  ClosedSetHash::Search....... = %d\n"
-		"  ClosedSetHash::Add.......... = %d\n"
-		"  ClosedSetHash::Erase........ = %d\n"
-		"  ClosedSetHash::Size......... = %d\n"
-		"  ClosedSetHash::Collisions... = %d\n",
-		m_stats_search,
-		m_stats_add,
-		m_stats_erase,
-		m_stats_size,
-		m_stats_collision);
+    std::cout << "  ClosedSetHash::Search....... = " << m_stats_search << "\n";
+    std::cout << "  ClosedSetHash::Add.......... = " << m_stats_add << "\n";
+    std::cout << "  ClosedSetHash::Erase........ = " << m_stats_erase << "\n";
+    std::cout << "  ClosedSetHash::Size......... = " << m_stats_size << "\n";
+    std::cout << "  ClosedSetHash::Collisions... = " << m_stats_collision << "\n";
 #else
 	// fprintf(out, "ClosedSetSTL. No statistics available!\n");
 #endif

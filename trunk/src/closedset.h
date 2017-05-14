@@ -58,6 +58,8 @@
 #include "pathnode.h"
 #include <cassert>
 #include <set>
+#include <cstddef>
+#include <cstdio>
 
 //
 // ---------------------------------------------------------------------------------

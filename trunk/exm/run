@@ -6,14 +6,15 @@ for item in $(ls)
 do
     if [[ -d "${item}" && ! -L "${item}" ]]; then
         cd ${item}
-        echo ${item}
-        ${ASTAR} a.inp > solution.dat
-#        cmp solution.dat solution.dat.ref
-#        if [ $? -eq 0 ]; then
-#            echo $item OK
-#        else
-#            echo $item FAILED
-#        fi
+        ${ASTAR} a.inp > a.sol
+        cmp a.sol a.sol.ref
+        if [ $? -eq 0 ]; then
+            echo $item OK
+        else
+            echo $item FAILED
+        fi
         cd ..
     fi
 done
+
+

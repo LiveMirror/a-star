@@ -183,13 +183,12 @@ char i = 0;
 //
 // Prints the difference between "this" state and "next" state. 
 //
-void StateP25::PrintDiff(const StateP25& /*next*/) const
+void StateP25::PrintDiff( const StateP25& next ) const
 {
-    /*
 // Name of moves
-static const char * const moveName[4] = {"Right", "Left", "Up", "Down"};
+//static const char * const moveName[4] = {"Right", "Left", "Up", "Down"};
 const char sp = SpaceIdx();
-char m;
+/*char m;
 
 	if((sp + 1) < TILENO && next.IsSpace(sp + 1))
 		m = 0; // Right
@@ -204,8 +203,9 @@ char m;
 		m = 3; // Down
 	}
 
-	// printf("  Next move: '%s' %s\n\n", next.Lab(sp), moveName[m]);
-	printf("%s ", next.Lab(sp));
+    printf("  Next move: '%s' %s\n\n", next.Lab(sp), moveName[m]);
     */
+	printf("%s ", next.Lab(sp));
+
 }
 

@@ -27,6 +27,7 @@
 #include <cstring>
 #include <cstdio>
 #include <cassert>
+#include <string>
 
 class StateP25
 {
@@ -57,6 +58,8 @@ public:
 
 	void Print(FILE* out) const;
 	void PrintDiff(const StateP25& next) const;
+
+    void Read( const std::string& file );
 
 private:
 	const char* Lab(char i) const;

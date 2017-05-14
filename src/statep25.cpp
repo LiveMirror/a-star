@@ -1,4 +1,10 @@
 #include "statep25.h"
+#include <sstream>
+#include <fstream>
+#include <iostream>
+#include <array>
+#include <algorithm>
+
 
 // X-coordinates for tiles 
 const char StateP25::m_coorX[StateP25::TILENO] = {
@@ -81,6 +87,85 @@ fprintf(out,
 	Lab(10), Lab(11), Lab(12), Lab(13), Lab(14),
 	Lab(15), Lab(16), Lab(17), Lab(18), Lab(19),
 	Lab(20), Lab(21), Lab(22), Lab(23), Lab(24));
+}
+
+//
+// Reads the state from the file.
+//
+void StateP25::Read( const std::string& path )
+{
+    std::ifstream in( path, std::ios::in );
+    if( !in )
+    {
+        const std::string msg = "Cannot open file. Path = " + path;
+        throw std::invalid_argument( msg );
+    }
+
+    int idx = 0;
+    std::string line;
+
+    while( true )
+    {
+        std::getline( in, line );
+
+        if( in.eof() )
+        {
+            const std::string msg = "Unexpexted end of file. Path = " + path;
+            throw std::invalid_argument( msg );
+        }
+
+        if( line.empty() ) // Skip empty line
+        {
+            continue;
+        }
+
+        if( std::all_of(line.begin(), line.end(), isspace) ) // Skip line with only whitespaces
+        {
+            continue;
+        }
+
+        if( line[0] == '#' ) // If this line a comment
+        {
+            continue;
+        }
+
+
+        int val;
+        std::stringstream ss( line );
+
+        if( ss.eof() )
+        {
+            const std::string msg = "Unexpexted end of file. Path = " + path;
+            throw std::invalid_argument( msg );
+        }
+
+        if( ss.fail() )
+        {
+            std::string msg = "Error during reading file.\n";
+            msg += "Path = " + path;
+            msg += "Line = " + line;
+            throw std::invalid_argument( msg );
+        }
+
+        for( int x = 0; x < WIDTH; x++ )
+        {
+            ss >> val;
+            if( val < 0 || val > 24 )
+            {
+                std::string msg = "Not allowed value in file with state.\n";
+                msg += "Path = " + path + "\n";
+                msg += "Line = " + line;
+                throw std::invalid_argument( msg );
+            }
+
+            m_tab[ idx++ ] = static_cast< char >( val );
+        }
+
+        if( idx >= 25 )
+            break;
+
+    }
+
 }
 
 //

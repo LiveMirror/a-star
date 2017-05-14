@@ -7,7 +7,7 @@
 //
 // If you want to modify the goal state, tables StateP25::m_coorX, StateP25::m_coorY
 // must be modyfied as well!
-static const char goalTmp[] = {
+static const std::array< char, StateP25::TILENO> goalTmp = {
 	 1,  2,  3,  4,  5,
 	 6,  7,  8,  9, 10,
 	11, 12, 13, 14, 15,
@@ -89,14 +89,6 @@ const char movesNo = MovesNo(idx);
 	return movesNo;
 }
 
-//
-// Returns exemplary START state
-//
-StateP25 GraphP25::Sample(int id)
-{
-	assert(id >= 0 && id < SAMPLENO);
-	return StateP25(m_sample[id]);
-}
 
 //
 // Calculates heurictic for state "s" as Manhatten distance 

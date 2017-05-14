@@ -28,6 +28,7 @@
 #include <cstdio>
 #include <cassert>
 #include <string>
+#include <array>
 
 class StateP25
 {
@@ -43,7 +44,7 @@ public:
 
 public:
 	StateP25(void);
-	explicit StateP25(const char* tab);
+    explicit StateP25( const std::array< char, TILENO> tab );
 
 	bool operator==(const StateP25& s) const;
 	bool operator< (const StateP25& s) const;
@@ -66,7 +67,8 @@ private:
 	
 private:
 	// Tiles on the board
-	char m_tab[TILENO];
+    // char m_tab[TILENO];
+    std::array< char, TILENO> m_tab;
 
 private:
 	// X-coordinates of the GOAL state
@@ -136,15 +138,12 @@ char StateP25::Y(char i) const
 inline
 bool StateP25::operator==(const StateP25& s) const
 {
-/*
-	for(int i = 0; i < TILENO; i++)
-	{
-		if(m_tab[i] != s.m_tab[i])
-			return false;
-	}
-	return true;
-*/
-	return (::memcmp(m_tab, s.m_tab, TILENO * sizeof(char)) == 0);
+    for(int i = 0; i < TILENO; i++)
+    {
+        if(m_tab[i] != s.m_tab[i])
+            return false;
+    }
+    return true;
 }
 
 #endif

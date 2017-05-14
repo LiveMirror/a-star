@@ -2,7 +2,6 @@
 #include <sstream>
 #include <fstream>
 #include <iostream>
-#include <array>
 #include <algorithm>
 
 
@@ -36,15 +35,14 @@ const char* const StateP25::m_label[TILENO] = {
 //
 StateP25::StateP25(void)
 {
-	for(int i = 0; i < TILENO; i++)
-		m_tab[i] = 0;
+    m_tab.fill( 0 );
 }
 
 //
 // Constructor
 // "tab" defines the initial state
 //
-StateP25::StateP25(const char* tab)
+StateP25::StateP25( const std::array< char, StateP25::TILENO > tab )
 {
 	for(int i = 0; i < TILENO; i++)
 		m_tab[i] = tab[i];
@@ -74,19 +72,17 @@ bool StateP25::operator<(const StateP25& s) const
 //
 void StateP25::Print(FILE* out) const
 {
-const char* const p = m_tab;
-
-fprintf(out, 
-	"   %s %s %s %s %s\n"
-	"   %s %s %s %s %s\n"
-	"   %s %s %s %s %s\n"
-	"   %s %s %s %s %s\n"
-	"   %s %s %s %s %s", 
-	Lab( 0), Lab( 1), Lab( 2), Lab( 3), Lab( 4),
-	Lab( 5), Lab( 6), Lab( 7), Lab( 8), Lab( 9),
-	Lab(10), Lab(11), Lab(12), Lab(13), Lab(14),
-	Lab(15), Lab(16), Lab(17), Lab(18), Lab(19),
-	Lab(20), Lab(21), Lab(22), Lab(23), Lab(24));
+    fprintf(out,
+        "   %s %s %s %s %s\n"
+        "   %s %s %s %s %s\n"
+        "   %s %s %s %s %s\n"
+        "   %s %s %s %s %s\n"
+        "   %s %s %s %s %s",
+        Lab( 0), Lab( 1), Lab( 2), Lab( 3), Lab( 4),
+        Lab( 5), Lab( 6), Lab( 7), Lab( 8), Lab( 9),
+        Lab(10), Lab(11), Lab(12), Lab(13), Lab(14),
+        Lab(15), Lab(16), Lab(17), Lab(18), Lab(19),
+        Lab(20), Lab(21), Lab(22), Lab(23), Lab(24));
 }
 
 //

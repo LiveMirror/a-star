@@ -23,37 +23,41 @@
 
 #include "astar.h"
 #include "graphp25.h"
+#include <iostream>
 
 
 void Intro(FILE* out);
-int GetSampleId(void);
-void TestAstar25(void);
+void RunAstar( const StateP25& beg );
 
 int main(int argc, char* argv[])
 {
-	do
-	{
-		Intro(stdout);
-		TestAstar25();
-		printf("NEW TEST? TO BREAK TYPE n. NEW TEST?   ");
-	}
-	while(getc(stdin) != 'n');
+    Intro( stdout );
+
+    if( argc != 2 )
+    {
+        std::cout << "Invalid number of parameters.\n";
+        std::cout << "Provide file name for the initial state\n";
+        return 1;
+    }
+
+
+    StateP25 beg;
+    beg.Read( argv[ 1 ] );
+
+    RunAstar( beg );
 	
 	return 0;
 }
 
 
-void TestAstar25(void)
+void RunAstar( const StateP25& beg )
 {
-Astar<GraphP25> as;
-GraphP25 graph;
-StateP25::Cost cost;
-std::vector<StateP25> path;
-bool pathFound;
-int sampleId;
+    Astar<GraphP25> as;
+    GraphP25 graph;
+    StateP25::Cost cost;
+    std::vector<StateP25> path;
+    bool pathFound;
 
-	sampleId = GetSampleId();
-	StateP25 beg = GraphP25::Sample(sampleId);
 
 	printf("SELECTED-BEGIN-STATE:\n");
 	beg.Print(stdout);
@@ -121,24 +125,3 @@ void Intro(FILE* out)
 		__DATE__, __TIME__);
 }
 
-int GetSampleId(void)
-{
-int sampleId;
-
-	while(true)
-	{
-		sampleId = -1;
-		printf("Give ID (from 0 to 5) of begin state:  ");
-        scanf( "%d", &sampleId);
-		
-		// Skip characters written by user
-		int charNo = 0;
-		while(getc(stdin) != '\n') { charNo++; }
-
-		// Check if number between 0 and 5 is given.
-		if(sampleId >= 0 && sampleId <= 5 && charNo == 0)
-			break;
-	}
-	printf("\n");
-	return sampleId;
-}

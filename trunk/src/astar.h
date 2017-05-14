@@ -42,7 +42,7 @@ private:
 public:
 	explicit Astar(unsigned int chunkSize = 10000);
 
-	bool Find(Graph& graph, State& beg, std::vector<State>& path, Cost& cost);
+    bool Find(Graph& graph, const State& beg, std::vector<State>& path, Cost& cost);
 
 	size_t ClosedNo(void) const { return m_cs.Size(); }
 	size_t OpenNo  (void) const { return m_os.Size(); }
@@ -100,7 +100,7 @@ Astar<Graph, CS, OS>::Astar(unsigned int chunkSize) : m_mem(chunkSize)
 // cost  [OUT] - cost of found path
 //
 template<typename Graph, template <typename S> class CS, template <typename S> class OS> 
-bool Astar<Graph, CS, OS>::Find(Graph& graph, State& beg, std::vector<State>& path, Cost& cost)
+bool Astar<Graph, CS, OS>::Find(Graph& graph, const State& beg, std::vector<State>& path, Cost& cost)
 {
 size_t cnt = 0;
 PathNode<State>* p;

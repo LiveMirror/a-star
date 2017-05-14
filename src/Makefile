@@ -23,6 +23,7 @@ VPATH := ../src/
 # Source files (listed in alphabetical order)
 
 SOURCE := 
+SOURCE += graphp25.cpp
 SOURCE += main.cpp
 SOURCE += statep25.cpp
 

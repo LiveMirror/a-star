@@ -28,6 +28,7 @@
 #include "opensethash.h"
 
 #include "memmgr.h"
+#include <list>
 
 template<typename Graph, 
 	template <typename S> class CS = ClosedSetHash,

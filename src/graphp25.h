@@ -41,8 +41,6 @@ public:
 	size_t MaxChildNo(void) const;
 	size_t GetChildren(const State& x, std::vector<State>& child, std::vector<Cost>& cost, std::vector<Cost>& heur);
 
-	static StateP25 Sample(int id);
-
 private:
 	StateP25::Cost Manhattan(const StateP25& x) const;
 

@@ -1,0 +1,20 @@
+A star, A*
+Author: Zbigniew Romanowski
+e-mail: romz@wp.pl
+===========================================
+
+This program solves 24-puzzle problem.
+It uses A* (A-star) with Manhattan metric to find the solution.
+Open set and closed set of A* are implemented as STL containers.
+For demonstration purpose, exemplary begin states are provided.
+		
+  STATE-ID     NUMBER-OF-MOVES    CLOSED-SET    OPEN-SET      
+--------------------------------------------------------------
+    0          15 (very easy)           29            34      
+    1          30 (easy)             3 130         4 250      
+    2          42                   38 685        44 242      
+    3          52                  369 542       450 681      
+    4          48                  362 713       416 516      
+    5          ?? (very hard)          
+
+                       

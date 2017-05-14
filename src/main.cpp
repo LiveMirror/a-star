@@ -26,12 +26,12 @@
 #include <iostream>
 
 
-void Intro(FILE* out);
+void Intro();
 void RunAstar( const StateP25& beg );
 
 int main(int argc, char* argv[])
 {
-    Intro( stdout );
+    Intro( );
 
     if( argc != 2 )
     {
@@ -59,36 +59,35 @@ void RunAstar( const StateP25& beg )
     bool pathFound;
 
 
-	printf("SELECTED-BEGIN-STATE:\n");
+    std::cout << "SELECTED-BEGIN-STATE:\n";
 	beg.Print(stdout);
-	printf("\n\nComputing...");
+    std::cout << "\n\nComputing...";
 
 	pathFound = as.Find(graph, beg, path, cost);
 	if(!pathFound)
 	{
-		printf("Path NOT found for START state:\n");
+        std::cout << "Path NOT found for START state:\n";
 		beg.Print(stdout);
 		return;
 	}
-	printf("...Ok\n");
+    std::cout << "...Ok\n";
 	const size_t stateNo = path.size();
 	as.PrintStats(stdout);
 
-	printf("\nFINAL-NUMBER-OF-STATES:\n"
-		"   Closed-set... = %d\n"
-		"   Open-set..... = %d\n\n",
-		as.ClosedNo(), as.OpenNo());
+    std::cout << "\nFINAL-NUMBER-OF-STATES:\n";
+    std::cout << "   Closed-set... = " << as.ClosedNo() << "\n";
+    std::cout << "   Open-set..... = " << as.OpenNo() << "\n\n";
 
-	printf("NUMBER-OF-STATES-IN-FOUND-PATH = %d\n\n", stateNo - 1);
+    std::cout << "NUMBER-OF-STATES-IN-FOUND-PATH = " << ( stateNo - 1 ) << "\n\n";
 
-	printf("FOUND-MOVES:\n");
+    std::cout << "FOUND-MOVES:\n";
 	for(size_t i = 0; i < stateNo; i++)
 	{
 		if(i < stateNo - 1)
 			path[i + 1].PrintDiff(path[i]);
 
 		if((i+1) % 10 == 0)
-			printf("\n");
+            std::cout << "\n";
 	}
 
 	
@@ -97,19 +96,18 @@ void RunAstar( const StateP25& beg )
 }
 
 
-void Intro(FILE* out)
+void Intro()
 {
-	fprintf(out,
-        "===============================================================================\n"
-        " AAAAA  SSSSS TTTTT AAAAA  RRRRR   Zbigniew ROMANOWSKI  \n"
-        " A   A  S       T   A   A  R   R                        \n"
-        " AAAAA  SSSSS   T   AAAAA  RRRRR                        \n"
-        " A   A      S   T   A   A  R  R    romz@wp.pl           \n"
-        " A   A  SSSSS   T   A   A  R   R                        \n"
-		"===============================================================================\n\n"
-		" This program solves 24-puzzle problem.\n"
-		" It uses A* (A-star) with Manhattan metric to find the solution.\n"
-		" Open set and closed set of A* are implemented as STL containers.\n"
-        "===============================================================================\n\n");
+    std::cout << "===============================================================================\n";
+    std::cout << " AAAAA  SSSSS TTTTT AAAAA  RRRRR   Zbigniew ROMANOWSKI  \n";
+    std::cout << " A   A  S       T   A   A  R   R                        \n";
+    std::cout << " AAAAA  SSSSS   T   AAAAA  RRRRR                        \n";
+    std::cout << " A   A      S   T   A   A  R  R    romz@wp.pl           \n";
+    std::cout << " A   A  SSSSS   T   A   A  R   R                        \n";
+    std::cout << "===============================================================================\n\n";
+    std::cout << " This program solves 24-puzzle problem.\n";
+    std::cout << " It uses A* (A-star) with Manhattan metric to find the solution.\n";
+    std::cout << " Open set and closed set of A* are implemented as STL containers.\n";
+    std::cout << "===============================================================================\n\n";
 }
 

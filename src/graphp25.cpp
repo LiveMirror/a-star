@@ -89,7 +89,6 @@ const char movesNo = MovesNo(idx);
 	return movesNo;
 }
 
-
 //
 // Calculates heurictic for state "s" as Manhatten distance 
 //

@@ -24,6 +24,8 @@ VPATH := ../src/
 
 SOURCE := 
 SOURCE += main.cpp
+SOURCE += statep25.cpp
+
 
 #Object files
 OBJECT := $(SOURCE:.cpp=.o)

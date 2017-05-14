@@ -56,9 +56,13 @@ private:
 // eltNo - initial size of array
 //
 template<typename T>
-MemMgr<T>::MemMgr(unsigned int chunkSize) : m_row(0), m_chunk(0), m_chunkSize(chunkSize), m_tab(100)
+MemMgr<T>::MemMgr( unsigned int chunkSize )
+    : m_chunkSize( chunkSize )
+    , m_chunk( 0 )
+    , m_row( 0 )
+    , m_tab( 100 )
 {
-	m_tab[0] = new T[chunkSize];	
+    m_tab[ 0 ] = new T[ chunkSize ];
 }
 
 //

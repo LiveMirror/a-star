@@ -60,6 +60,7 @@
 #include <set>
 #include <cstddef>
 #include <cstdio>
+#include <iostream>
 
 //
 // ---------------------------------------------------------------------------------
@@ -100,7 +101,7 @@ public:
 	void Erase(void);
 	size_t Size() const;
 
-	void PrintStats(FILE* out) const;
+    void PrintStats() const;
 
 private:
 	// Container storing pointers to "PathNode<S>"
@@ -213,19 +214,13 @@ size_t ClosedSet<S>::Size() const
 // Prints statistics to file "out"
 //
 template<typename S>
-void ClosedSet<S>::PrintStats(FILE* out) const
+void ClosedSet<S>::PrintStats() const
 {
 #ifdef ASTAR_STATISTICS
-	fprintf(out, 
-//		"\nSTATISTICS:\n"
-        "  ClosedSet::Search.... = %d\n"
-        "  ClosedSet::Add....... = %d\n"
-        "  ClosedSet::Erase..... = %d\n"
-        "  ClosedSet::Size...... = %d\n",
-		m_stats_search,
-		m_stats_add,
-		m_stats_erase,
-		m_stats_size);
+    std::cout << "  ClosedSet::Search.... = " << m_stats_search << "\n";
+    std::cout << "  ClosedSet::Add....... = " << m_stats_add << "\n";
+    std::cout << "  ClosedSet::Erase..... = " << m_stats_erase << "\n";
+    std::cout << "  ClosedSet::Size...... = " << m_stats_size << "\n";
 #else
     // fprintf(out, "ClosedSet. No statistics available!\n");
 #endif

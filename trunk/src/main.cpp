@@ -72,7 +72,7 @@ void RunAstar( const StateP25& beg )
 	}
     std::cout << "...Ok\n";
 	const size_t stateNo = path.size();
-	as.PrintStats(stdout);
+    as.PrintStats();
 
     std::cout << "\nFINAL-NUMBER-OF-STATES:\n";
     std::cout << "   Closed-set... = " << as.ClosedNo() << "\n";

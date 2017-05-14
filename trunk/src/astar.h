@@ -29,6 +29,7 @@
 
 #include "memmgr.h"
 #include <list>
+#include <iostream>
 
 template<typename Graph, 
 	template <typename S> class CS = ClosedSetHash,
@@ -49,7 +50,7 @@ public:
 
 	time_t FindTime(void) const { return m_findTime; }
 
-	void PrintStats(FILE* out) const;
+    void PrintStats() const;
 
 private:
 	void ChildLoop(Graph& graph, PathNode<State>* x);
@@ -100,7 +101,7 @@ Astar<Graph, CS, OS>::Astar(unsigned int chunkSize) : m_mem(chunkSize)
 // cost  [OUT] - cost of found path
 //
 template<typename Graph, template <typename S> class CS, template <typename S> class OS> 
-bool Astar<Graph, CS, OS>::Find(Graph& graph, const State& beg, std::vector<State>& path, Cost& cost)
+bool Astar<Graph, CS, OS>::Find(Graph& graph, const State& beg, std::vector<State>& path, Cost& /*cost*/)
 {
 size_t cnt = 0;
 PathNode<State>* p;
@@ -135,8 +136,8 @@ bool found = false;
 		m_stats_loopNo++;
 #endif
 		cnt++;
-		if(cnt % 10000  == 0) { printf("."); fflush(stdout); }
-		if(cnt % 100000 == 0) { printf("%d", cnt/1000); fflush(stdout); }
+        if(cnt % 10000  == 0) { std::cout << "." << std::flush; }
+        if(cnt % 100000 == 0) { std::cout << cnt / 1000 << std::flush; }
 
 		// the node in openset having the lowest f_score value
 		p = m_os.Best();
@@ -221,18 +222,18 @@ std::list<State> tmp; // Temporary list for storing states in proper order
 // Writes statistics to log file
 //
 template<typename Graph, template <typename S> class CS, template <typename S> class OS> 
-void Astar<Graph, CS, OS>::PrintStats(FILE* out) const
+void Astar<Graph, CS, OS>::PrintStats() const
 {
 #ifdef ASTAR_STATISTICS
-	fprintf(out, "\nSTATISTICS:\n");
+    std::cout << "\nSTATISTICS:\n";
 	
-	fprintf(out, "  Astar::LoopNo = %d\n\n", m_stats_loopNo);
+    std::cout << "  Astar::LoopNo = " << m_stats_loopNo << "\n\n";
 
-	m_os.PrintStats(out);
-	fprintf(out, "\n");
+    m_os.PrintStats();
+    std::cout << "\n";
 
-	m_cs.PrintStats(out);
-	fprintf(out, "\n");
+    m_cs.PrintStats();
+    std::cout << "\n";
 #else
 	// fprintf(out, "Astar. No statistics available!\n");
 #endif
